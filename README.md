@@ -15,6 +15,8 @@ This project requires **Python 3.5** and the following Python libraries installe
 - [SciPy](https://www.scipy.org/)
 - [scikit-learn](http://scikit-learn.org/)
 - [TensorFlow](http://tensorflow.org)
+- [seaborn](http://seaborn.pydata.org/)
+- PIL
 
 Run this command at the terminal prompt to install [OpenCV](http://opencv.org/). Useful for image processing:
 
