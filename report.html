@@ -17295,18 +17295,18 @@ The reason why I generated the data was that some labels in training data are no
 The total layer of the model is 5 layers, 2 layers for convolution and 3 layers for fully connected layers.
 The structure is below.<br></p>
 
-<pre><code>Layer 1: Convolutional. Input = 32x32x1. Output = 28x28x6&lt;br&gt;
-Activation.&lt;br&gt;
-Pooling. Input = 28x28x6. Output = 14x14x6.&lt;br&gt;
-Layer 2: Convolutional. Output = 10x10x16.&lt;br&gt;
-Activation.&lt;br&gt;
-Pooling. Input = 10x10x16. Output = 5x5x16.&lt;br&gt;
-Flatten. Input = 5x5x16. Output = 400.&lt;br&gt;
-Layer 3: Fully Connected. Input = 400. Output = 120.&lt;br&gt;
-Activation.&lt;br&gt;
-Dropout&lt;br&gt;
-Layer 4: Fully Connected. Input = 120. Output = 84.&lt;br&gt;
-Activation.&lt;br&gt;
+<pre><code>Layer 1: Convolutional. Input = 32x32x1. Output = 28x28x6, 1x1stride,padding is VALID
+Activation(ReLU).
+Pooling. Input = 28x28x6. Output = 14x14x6,2x2stride,2x2 kernel size, padding is VALID
+Layer 2: Convolutional. Output = 10x10x16,1x1stride,padding is VALID
+Activation(ReLU).
+Pooling. Input = 10x10x16. Output = 5x5x16,2x2stride,2x2 kernel size, padding is VALID
+Flatten. Input = 5x5x16. Output = 400.
+Layer 3: Fully Connected. Input = 400. Output = 120.
+Activation(ReLU).
+Dropout(dropout percent is 50%)
+Layer 4: Fully Connected. Input = 120. Output = 84.
+Activation(ReLU).
 Layer 5: Fully Connected. Input = 84. Output = 10.</code></pre>
 
 </div>
@@ -18988,7 +18988,8 @@ iKjK2JkkIiIioir7f1O0a+fs/SJ5AAAAAElFTkSuQmCC
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><strong>Answer:</strong>
 I used Adam as the optimizer for this project.
-The batch size of this model is 64 and the number of epochs is 30.
+The batch size of this model is 64 and the number of epochs is 50.
+I decided the epoch numbers as above since the accuracy score in validation data doesn't increase after 50 epochs. Less than 50 epochs(around 20 epochs) tends to be underfitting and more than 50 epochs tends to be overfitting. Therefore, I chosed 50 epochs. I saved the model at every 5 epochs. <br>
 The architecture of the model is based on the LeNet, however I set dropout layer at the first layer of fully connected layer.</p>
 
 </div>
@@ -19010,6 +19011,7 @@ The architecture of the model is based on the LeNet, however I set dropout layer
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><strong>Answer:</strong>
+At first, I tried to construct some architectures.(3 convolution layers and 2 fully connencted layers, 2 convolution layers and 2 fully connected layers and so on) However, the accuracy score wasn't so much high(around 85% in test score). Therefore, I tried LeNet network which is well known and good base model for 32x32size images and the architecture worked very well. Thus, I decided fine tuning the LeNet architecture for this project.<br>
 I put the dropout layer at the first layer of fully connected layer which doesn't have in the original LeNet architecture.
 I tried it to prevent overfitting. Since I don't know what percentage should I keep in the dropout layer, I tried several percentages ranging from 10% to 100% of keeping the network(100% means no dropout layer.). Then I got the best result when I tried 50% of keeping probability. Therefore, I chose 50% of keep in the dropout layer.</p>
 
